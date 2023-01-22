@@ -1,0 +1,52 @@
+﻿@model List<Book>
+@{
+    ViewData["Title"] = "Index";
+    int counter = 0;
+}
+@section css{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.0/sweetalert2.min.css" integrity="sha512-NvuRGlPf6cHpxQqBGnPe7fPoACpyrjhlSNeXVUY7BZAj1nNhuNpRBq3osC4yr2vswUEuHq2HtCsY2vfLNCndYA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+}
+<div class="container" style="display : flex; justify-content:space-between; align-items:center; margin-left: 10px">
+    <h1>Books</h1>
+    <a asp-action="create" asp-controller="book"  class="btn btn-success">Create book</a>
+
+</div>
+
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">CostPrice</th>
+                <th scope="col">SalePrice</th>
+                <th scope="col">Discount Price</th>
+                <th scope="col">Book Code</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Book book in Model)
+            {
+                counter++;
+                <tr>
+                    <th scope="row">@counter</th>
+                    <td>@book.Name</td>
+                    <td>@book.CostPrice</td>
+                    <td>@book.SalePrice</td>
+                    <td>@book.DiscountPrice</td>
+                    <td>@book.Code</td>
+                    <td>
+                        <a asp-action="edit" asp-controller="book" asp-route-id="@book.Id" class="btn btn-info">Edit</a>
+                        <a asp-action="delete" asp-controller="book" asp-route-id="@book.Id" class="btn btn-danger delete-button">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.0/sweetalert2.min.js" integrity="sha512-IYzd4A07K9kxY3b8YIXi8L0BmUPVvPlI+YpLOzKrIKA3sQ4gt43dYp+y6ip7C7LRLXYfMHikpxeprZh7dYQn+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+}

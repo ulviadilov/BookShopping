@@ -1,0 +1,88 @@
+﻿@model Book
+
+<div class="container">
+    <h1>Create book</h1>
+    <form method="post" asp-action="create" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Name</label>
+            <input asp-for="Name" class="form-control">
+            <span asp-validation-for="Name" style="color: red"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="CostPrice" class="form-label">CostPrice</label>
+            <input asp-for="CostPrice" class="form-control">
+            <span asp-validation-for="CostPrice" style="color: red"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="SalePrice" class="form-label">SalePrice</label>
+            <input asp-for="SalePrice" class="form-control">
+            <span asp-validation-for="SalePrice" style="color: red"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="DiscountPrice" class="form-label">DiscountPrice</label>
+            <input asp-for="DiscountPrice" class="form-control">
+            <span asp-validation-for="DiscountPrice" style="color: red"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Code" class="form-label">Book code</label>
+            <input asp-for="Code" class="form-control">
+            <span asp-validation-for="Code" style="color: red"></span>
+        </div>
+        <div class="mb-3 form-check">
+            <input asp-for="IsAvaliable" class="form-check-input">
+            <label class="form-check-label" asp-for="IsAvaliable">IsAvailable</label>
+            <span asp-validation-for="IsAvaliable" style="color: red"></span>
+        </div>
+        <div class="mb-3 form-check">
+            <input asp-for="IsFeatured" class="form-check-input">
+            <label class="form-check-label" asp-for="IsFeatured">IsFeatured</label>
+            <span asp-validation-for="IsFeatured" style="color: red"></span>
+        </div>
+        <div class="mb-3 form-check">
+            <input asp-for="IsNew" class="form-check-input">
+            <label class="form-check-label" asp-for="IsNew">IsNew</label>
+            <span asp-validation-for="IsNew" style="color: red"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Desc" class="form-label">Description</label>
+            <textarea class="form-control" asp-for="Desc" rows="3"></textarea>
+            <span asp-validation-for="Desc" style="color: red"></span>
+        </div>
+        <div class="mb-3" style="margin-right: 800px">
+            <label asp-for="ImageFiles" class="form-label">ImageFiles</label>
+            <input asp-for="ImageFiles" class="form-control">
+            <span asp-validation-for="ImageFiles" style="color: red"></span>
+        </div>
+        <div class="mb-3" style="margin-right: 800px">
+            <label asp-for="PosterImageFile" class="form-label">PosterImageFile</label>
+            <input asp-for="PosterImageFile" class="form-control">
+            <span asp-validation-for="PosterImageFile" style="color: red"></span>
+        </div>
+        <div class="mb-3" style="margin-right: 800px">
+            <label asp-for="HoverImageFile" class="form-label">HoverImageFile</label>
+            <input asp-for="HoverImageFile" class="form-control">
+            <span asp-validation-for="HoverImageFile" style="color: red"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="AuthorId" class="form-label">Author</label>
+            <select class="form-select" aria-label="Default select example" asp-for="AuthorId">
+                @foreach (Author author in ViewBag.Authors)
+                {
+                    <option value="@author.Id">@author.Fullname</option>
+                }
+            </select>
+            <span asp-validation-for="AuthorId" style="color: red"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Category" class="form-label">Category</label>
+            <select class="form-select" aria-label="Default select example" asp-for="CategoryId">
+                @foreach (Category category in ViewBag.Categories)
+                {
+                        <option value="@category.Id">@category.Name</option>
+                }
+            </select>
+            <span asp-validation-for="CategoryId" style="color: red"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>

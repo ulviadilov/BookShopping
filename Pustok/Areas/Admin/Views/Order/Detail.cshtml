@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewData["Title"] = "Details";
+}
+
+@model Order
+<div class="container">
+    <h1>Orders</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Order Id</th>
+                <th scope="col">Fullname</th>
+                <th scope="col">Order Status</th>
+                <th scope="col">Country</th>
+                <th scope="col">Zip Code</th>
+                <th scope="col">Actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    
+                    <td>@Model.Id</td>
+                <td>@Model.Firstname @Model.Lastname</td>
+                @if (Model.OrderStatus == Pustok.Enums.OrderStatus.Pending)
+                    {
+                        <td>Pending</td>
+                    }
+                else if (Model.OrderStatus == Pustok.Enums.OrderStatus.Accepted)
+                    {
+                        <td>Accepted</td>
+                    }
+                    else
+                    {
+                        <td>Rejected</td>
+                    }
+                <td>@Model.Country</td>
+                <td>@Model.ZipCode</td>
+
+                    <td>
+                        <a class="btn btn-primary" asp-action="accept" asp-controller="order" asp-route-id="@Model.Id">Accept</a>
+                    <a class="btn btn-danger" asp-action="reject" asp-controller="order" asp-route-id="@Model.Id">Reject</a>
+
+                    </td>
+                </tr>
+            
+
+        </tbody>
+    </table>
+</div>

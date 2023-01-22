@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+@{
+    int count = 0;
+    double total = 0;
+
+}
+@model List<Order>
+<div class="container">
+    <h1>Orders</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Order Id</th>
+                <th scope="col">Fullname</th>
+                <th scope="col">Order Status</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Order order in Model)
+            {
+                count++;
+                <tr>
+                    <th scope="row">@count</th>
+                    <td>@order.Id</td>
+                    <td>@order.Firstname @order.Lastname</td>
+                    @if (order.OrderStatus == Pustok.Enums.OrderStatus.Pending)
+                    {
+                        <td>Pending</td>
+                    }
+                    else if (order.OrderStatus == Pustok.Enums.OrderStatus.Accepted)
+                    {
+                        <td>Accepted</td>
+                    }
+                    else
+                    {
+                        <td>Rejected</td>
+                    }
+
+                    <td>@order.TotalPrice</td>
+                    <td>
+                        <a class="btn btn-primary" asp-controller="Order" asp-action="Detail" asp-route-id="@order.Id">Detail</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

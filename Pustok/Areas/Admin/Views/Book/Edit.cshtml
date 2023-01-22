@@ -1,0 +1,103 @@
+﻿@model Book
+
+<div class="container">
+    <h1>Edit book</h1>
+    <form method="post" asp-action="edit" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Name</label>
+            <input asp-for="Name" class="form-control">
+            <span asp-validation-for="Name" style="color: red"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="CostPrice" class="form-label">CostPrice</label>
+            <input asp-for="CostPrice" class="form-control">
+            <span asp-validation-for="CostPrice" style="color: red"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="SalePrice" class="form-label">SalePrice</label>
+            <input asp-for="SalePrice" class="form-control">
+            <span asp-validation-for="SalePrice" style="color: red"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="DiscountPrice" class="form-label">DiscountPrice</label>
+            <input asp-for="DiscountPrice" class="form-control">
+            <span asp-validation-for="DiscountPrice" style="color: red"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Code" class="form-label">Book code</label>
+            <input asp-for="Code" class="form-control">
+            <span asp-validation-for="Code" style="color: red"></span>
+        </div>
+        <div class="mb-3 form-check">
+            <input asp-for="IsAvaliable" class="form-check-input">
+            <label class="form-check-label" asp-for="IsAvaliable">IsAvailable</label>
+            <span asp-validation-for="IsAvaliable" style="color: red"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Desc" class="form-label">Description</label>
+            <textarea class="form-control" asp-for="Desc" rows="3"></textarea>
+            <span asp-validation-for="Desc" style="color: red"></span>
+        </div>
+        <div class="row">
+            <div class="mb-3 col-md-12">
+                <label asp-for="ImageFiles" class="form-label">ImageFiles</label>
+                <input asp-for="ImageFiles" class="form-control">
+                <span asp-validation-for="ImageFiles" style="color: red"></span>
+                <div class="row d-flex">
+                    @foreach (var bookImage in Model.BookImages.Where(bi => bi.IsPoster == null))
+                    {
+                        <div style="width:150px;margin-top:20px ; position:relative" class="col-md-2">
+                            <img style="max-width:100%" src="~/uploads/books/@bookImage?.Image">
+                            <span class="text-danger delete-image-button" style="position:absolute ; font-size:25px ; font-weight:bold ; cursor:pointer ;top:8px ; right:20px">X</span>
+                            <input type="hidden" name="BookImageIds" value="@bookImage.Id"/>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="mb-3" style="margin-right: 800px">
+            <label asp-for="PosterImageFile" class="form-label">PosterImageFile</label>
+            <input asp-for="PosterImageFile" class="form-control">
+            <span asp-validation-for="PosterImageFile" style="color: red"></span>
+        </div>
+        <div style="width:200px" class="position-relative">
+            <img style="max-width:100%" src="~/uploads/books/@Model.BookImages.FirstOrDefault(x => x.IsPoster == true)?.Image">
+            <span class="text-danger delete-image-button" style="position:absolute ; font-size:25px ; font-weight:bold ; cursor:pointer ;top:8px ; right:20px">X</span>
+            <input type="hidden" name="PosterImageId" value="@Model.BookImages.FirstOrDefault(x => x.IsPoster == true)?.Id" />
+
+        </div>
+        <div class="mb-3" style="margin-right: 800px">
+            <label asp-for="HoverImageFile" class="form-label">HoverImageFile</label>
+            <input asp-for="HoverImageFile" class="form-control">
+            <span asp-validation-for="HoverImageFile" style="color: red"></span>
+        </div>
+        <div style="width:200px" class="position-relative">
+            <img style="max-width:100%" src="~/uploads/books/@Model.BookImages.FirstOrDefault(x => x.IsPoster == false)?.Image">
+            <span class="text-danger delete-image-button" style="position:absolute ; font-size:25px ; font-weight:bold ; cursor:pointer ;top:8px ; right:20px">X</span>
+            <input type="hidden" name="HoverImageId" value="@Model.BookImages.FirstOrDefault(x => x.IsPoster == false)?.Id" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="AuthorId" class="form-label">Author</label>
+            <select class="form-select" aria-label="Default select example" asp-for="AuthorId">
+                @foreach (Author author in ViewBag.Authors)
+                {
+                        <option value="@author.Id">@author.Fullname</option>
+                }
+            </select>
+            <span asp-validation-for="AuthorId" style="color: red"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Category" class="form-label">Category</label>
+            <select class="form-select" aria-label="Default select example" asp-for="CategoryId">
+                @foreach (Category category in ViewBag.Categories)
+                {
+                            <option value="@category.Id">@category.Name</option>
+                }
+            </select>
+            <span asp-validation-for="CategoryId" style="color: red"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Edit</button>
+        <a asp-action="index" asp-controller="book" class="btn btn-outline-danger">Back</a>
+    </form>
+</div>

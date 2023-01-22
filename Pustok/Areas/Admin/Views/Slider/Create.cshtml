@@ -1,0 +1,38 @@
+﻿@model Slider
+
+<div class="container">
+    <h1>Create slider</h1>
+    <form method="post"asp-action="create" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label asp-for="Title1" class="form-label">Title-1</label>
+            <input asp-for="Title1" class="form-control">
+            <span asp-validation-for="Title1" style="color: red"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Title2" class="form-label">Title-2</label>
+            <input asp-for="Title2" class="form-control">
+            <span asp-validation-for="Title2" style="color: red"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Desc" class="form-label">Description</label>
+            <input asp-for="Desc" class="form-control">
+            <span asp-validation-for="Desc" style="color: red"></span>
+        </div>
+        <div class="mb-3" style="margin-right: 800px">
+            <label asp-for="ImageFile" class="form-label">Image file</label>
+            <input asp-for="ImageFile" class="form-control">
+            <span asp-validation-for="ImageFile" style="color: red"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Price" class="form-label">Price</label>
+            <input asp-for="Price" class="form-control">
+            <span asp-validation-for="Price" style="color: red"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="RedirectUrl" class="form-label">Redirect URL</label>
+            <input asp-for="RedirectUrl" class="form-control">
+            <span asp-validation-for="RedirectUrl" style="color: red"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>
